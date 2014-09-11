@@ -13,7 +13,11 @@ Supported Architecture
 ## Usage
 
 ### Load Binary
-
+This method copies the ffmpeg binary to device according to device's architecture. You just need to put this once in your code,
+whenever you are starting the application or using FFmpeg for the first time. This command does the following:
+* Loads/Copies binary to device according to architecture
+* Updates binary if it is using old FFmpeg version
+* Provides callbacks through FFmpegLoadBinaryResponseHandler interface
 ```java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
 try {
@@ -37,7 +41,9 @@ try {
 ```
 
 ### Execute Binary
-
+This method executes ffmpeg command and provides callback through FFmpegExecuteResponseHandler interface. You also need to pass command as argument
+to this method.
+e.g - To execute "ffmpeg -version" command you just need to pass "-version" as cmd parameter.
 ```java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
 try {
