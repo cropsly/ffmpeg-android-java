@@ -10,6 +10,24 @@ Supported Architecture
 * armv7-neon
 * x86
 
+## Adding Library to Project
+* TODO : I am still working to push this library to maven central repo
+* Download [AAR File](https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.1.0/FFmpegAndroid.aar)
+* Copy FFmpegAndroid.aar to app/libs
+* In your app/build.gradle add
+```groovy
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile(name:'FFmpegAndroid', ext:'aar')
+}
+```
+* Use the library
+
 ## Usage
 
 ### Load Binary
