@@ -4,13 +4,12 @@
 * FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi
 * Supports Android L
 
-Supported Architecture
-----
+## Supported Architecture
 * armv7
 * armv7-neon
 * x86
 
-## Adding Library to Project
+## Adding Library to Project (Android Studio)
 * TODO : I am still working to push this library to maven central repo
 * Download [AAR File](https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.1.0/FFmpegAndroid.aar)
 * Copy FFmpegAndroid.aar to app/libs
@@ -87,9 +86,19 @@ try {
   // Handle if FFmpeg is already running
 }
 ```
+
+## Available Methods
+* `loadBinary(FFmpegLoadBinaryResponseHandler ffmpegLoadBinaryResponseHandler) throws FFmpegNotSupportedException`
+* `execute(Map<String, String> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException`
+* `execute(String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException`
+* `getDeviceFFmpegVersion() throws FFmpegCommandAlreadyRunningException`
+* `getLibraryFFmpegVersion()`
+* `isFFmpegCommandRunning()`
+* `killRunningProcesses()`
+* `setTimeout(long timeout)`
+
 ## JavaDoc
 * [Javadoc](http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/)
 
-License
-----
-  check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.
+## License
+* Check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.
