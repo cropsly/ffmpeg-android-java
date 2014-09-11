@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Ffmpeg-android-java : Android java library for FFmpeg binary compiled using https://github.com/hiteshsondhi88/ffmpeg-android">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ffmpeg-android-java</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hiteshsondhi88/ffmpeg-android-java">View on GitHub</a>
+
+          <h1 id="project_title">Ffmpeg-android-java</h1>
+          <h2 id="project_tagline">Android java library for FFmpeg binary compiled using https://github.com/hiteshsondhi88/ffmpeg-android</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hiteshsondhi88/ffmpeg-android-java/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hiteshsondhi88/ffmpeg-android-java/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="ffmpeg-android-java" class="anchor" href="#ffmpeg-android-java"><span class="octicon octicon-link"></span></a>FFmpeg-Android-Java</h1>
+
+<ul>
+<li>FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi</li>
+<li>Supports Android L</li>
+</ul><h2>
+<a name="supported-architecture" class="anchor" href="#supported-architecture"><span class="octicon octicon-link"></span></a>Supported Architecture</h2>
+
+<ul>
+<li>armv7</li>
+<li>armv7-neon</li>
+<li>x86</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="load-binary" class="anchor" href="#load-binary"><span class="octicon octicon-link"></span></a>Load Binary</h3>
+
+<p>This method copies the ffmpeg binary to device according to device's architecture. You just need to put this once in your code,
+whenever you are starting the application or using FFmpeg for the first time. This command does the following:</p>
+
+<ul>
+<li>Loads/Copies binary to device according to architecture</li>
+<li>Updates binary if it is using old FFmpeg version</li>
+<li>Provides callbacks through FFmpegLoadBinaryResponseHandler interface</li>
+</ul><div class="highlight highlight-java"><pre><span class="n">FFmpeg</span> <span class="n">ffmpeg</span> <span class="o">=</span> <span class="n">FFmpeg</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+  <span class="n">ffmpeg</span><span class="o">.</span><span class="na">loadBinary</span><span class="o">(</span><span class="k">new</span> <span class="nf">FFmpegLoadBinaryResponseHandler</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">()</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">()</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFinish</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="o">});</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FFmpegNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Handle if FFmpeg is not supported by device</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>
+<a name="execute-binary" class="anchor" href="#execute-binary"><span class="octicon octicon-link"></span></a>Execute Binary</h3>
+
+<p>This method executes ffmpeg command and provides callback through FFmpegExecuteResponseHandler interface. You also need to pass command as argument
+to this method.</p>
+
+<ul>
+<li>To execute "ffmpeg -version" command you just need to pass "-version" as cmd parameter.</li>
+</ul><div class="highlight highlight-java"><pre><span class="n">FFmpeg</span> <span class="n">ffmpeg</span> <span class="o">=</span> <span class="n">FFmpeg</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+  <span class="c1">// to execute "ffmpeg -version" command you just need to pass "-version"</span>
+  <span class="n">ffmpeg</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">cmd</span><span class="o">,</span> <span class="k">new</span> <span class="nf">FFmpegExecuteResponseHandler</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onProgress</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFinish</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="o">});</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FFmpegCommandAlreadyRunningException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Handle if FFmpeg is already running</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>
+<a name="java-docs" class="anchor" href="#java-docs"><span class="octicon octicon-link"></span></a>Java Docs</h2>
+
+<ul>
+<li>TODO</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ffmpeg-android-java maintained by <a href="https://github.com/hiteshsondhi88">hiteshsondhi88</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-54645862-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
