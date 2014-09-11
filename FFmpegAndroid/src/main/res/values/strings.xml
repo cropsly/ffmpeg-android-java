@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FFmpegAndroid</string>
+    <string name="shipped_ffmpeg_version">n2.3.3</string>
+</resources>
