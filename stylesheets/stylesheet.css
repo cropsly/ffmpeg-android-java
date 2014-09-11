@@ -269,11 +269,7 @@ Full-Width Styles
   margin: 0 auto;
 }
 
-#forkme_banner {
-  display: block;
-  position: absolute;
-  top:0;
-  right: 10px;
+.github_banner {
   z-index: 10;
   padding: 10px 50px 10px 10px;
   color: #fff;
@@ -282,6 +278,20 @@ Full-Width Styles
   box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+}
+
+#github_banner_id {
+  right: 10px;
+  position: absolute;
+  top:5px;
+}
+
+#github_banner_id ul{
+  list-style: none;
+}
+
+#github_banner_id li{
+  display: inline;
 }
 
 #header_wrap {
