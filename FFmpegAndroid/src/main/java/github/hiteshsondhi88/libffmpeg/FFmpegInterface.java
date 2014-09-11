@@ -1,8 +1,6 @@
 package github.hiteshsondhi88.libffmpeg;
 
-import org.apache.http.NameValuePair;
-
-import java.util.List;
+import java.util.Map;
 
 import github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
@@ -24,7 +22,7 @@ interface FFmpegInterface {
      * @param ffmpegExecuteResponseHandler {@link github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler}
      * @throws FFmpegCommandAlreadyRunningException
      */
-    public void execute(List<NameValuePair> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException;
+    public void execute(Map<String, String> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException;
 
     /**
      * Executes a command

@@ -3,9 +3,7 @@ package github.hiteshsondhi88.libffmpeg;
 import android.content.Context;
 import android.text.TextUtils;
 
-import org.apache.http.NameValuePair;
-
-import java.util.List;
+import java.util.Map;
 
 import github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
@@ -63,7 +61,7 @@ public class FFmpeg implements FFmpegInterface {
     }
 
     @Override
-    public void execute(List<NameValuePair> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException {
+    public void execute(Map<String, String> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException {
         if (ffmpegExecuteAsyncTask != null && !ffmpegExecuteAsyncTask.isProcessCompleted()) {
             throw new FFmpegCommandAlreadyRunningException("FFmpeg command is already running, you are only allowed to run single command at a time");
         }

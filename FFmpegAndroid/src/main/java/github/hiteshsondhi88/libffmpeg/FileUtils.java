@@ -3,13 +3,11 @@ package github.hiteshsondhi88.libffmpeg;
 import android.content.Context;
 import android.util.Log;
 
-import org.apache.http.NameValuePair;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.Map;
 
 class FileUtils {
 
@@ -55,11 +53,11 @@ class FileUtils {
         return getFilesDirectory(context).getAbsolutePath() + File.separator + FileUtils.ffmpegFileName;
     }
 
-    static String getFFmpeg(Context context, List<NameValuePair> environmentVars) {
+    static String getFFmpeg(Context context, Map<String,String> environmentVars) {
         String ffmpegCommand = "";
         if (environmentVars != null) {
-            for (NameValuePair var : environmentVars) {
-                ffmpegCommand += var.getName()+"="+var.getValue()+" ";
+            for (Map.Entry<String, String> var : environmentVars.entrySet()) {
+                ffmpegCommand += var.getKey()+"="+var.getValue()+" ";
             }
         }
         ffmpegCommand += getFFmpeg(context);
