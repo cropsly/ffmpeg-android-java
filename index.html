@@ -16,12 +16,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <div id="github_banner_id">
-            <ul>
-              <li><a class="github_banner" href="https://github.com/hiteshsondhi88/ffmpeg-android-java">Fork me on GitHub</a></li>
-              <li><a class="github_banner" href="http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/">Java Docs</a></li>
-            </ul>
-          </div>
+          <a id="forkme_banner" href="https://github.com/hiteshsondhi88/ffmpeg-android-java">View on GitHub</a>
 
           <h1 id="project_title">FFmpeg Android Java</h1>
           <h2 id="project_tagline">Android java library for FFmpeg binary compiled using https://github.com/hiteshsondhi88/ffmpeg-android</h2>
@@ -36,9 +31,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-
         <h1>
-<a name="ffmpeg-android-java" class="anchor" href="#ffmpeg-android-java"><span class="octicon octicon-link"></span></a>FFmpeg Android Java</h1>
+<a name="ffmpeg-android-java" class="anchor" href="#ffmpeg-android-java"><span class="octicon octicon-link"></span></a><a href="http://hiteshsondhi88.github.io/ffmpeg-android-java/">FFmpeg-Android-Java</a>
+</h1>
 
 <ul>
 <li>FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi</li>
@@ -50,6 +45,28 @@
 <li>armv7</li>
 <li>armv7-neon</li>
 <li>x86</li>
+</ul><h2>
+<a name="adding-library-to-project-android-studio" class="anchor" href="#adding-library-to-project-android-studio"><span class="octicon octicon-link"></span></a>Adding Library to Project (Android Studio)</h2>
+
+<ul>
+<li>TODO : I am still working to push this library to maven central repo</li>
+<li>Download <a href="https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.1.0/FFmpegAndroid.aar">AAR File</a>
+</li>
+<li>Copy FFmpegAndroid.aar to app/libs</li>
+<li>In your app/build.gradle add</li>
+</ul><div class="highlight highlight-groovy"><pre><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">flatDir</span> <span class="o">{</span>
+        <span class="n">dirs</span> <span class="s1">'libs'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'FFmpegAndroid'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+
+<ul>
+<li>Use the library</li>
 </ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
@@ -117,9 +134,29 @@ to this method.</p>
 <span class="o">}</span>
 </pre></div>
 
-<h3> <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2> </h3>
+<h2>
+<a name="available-methods" class="anchor" href="#available-methods"><span class="octicon octicon-link"></span></a>Available Methods</h2>
 
-<p>check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.</p>
+<ul>
+<li><code>loadBinary(FFmpegLoadBinaryResponseHandler ffmpegLoadBinaryResponseHandler) throws FFmpegNotSupportedException</code></li>
+<li><code>execute(Map&lt;String, String&gt; environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException</code></li>
+<li><code>execute(String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException</code></li>
+<li><code>getDeviceFFmpegVersion() throws FFmpegCommandAlreadyRunningException</code></li>
+<li><code>getLibraryFFmpegVersion()</code></li>
+<li><code>isFFmpegCommandRunning()</code></li>
+<li><code>killRunningProcesses()</code></li>
+<li><code>setTimeout(long timeout)</code></li>
+</ul><h2>
+<a name="javadoc" class="anchor" href="#javadoc"><span class="octicon octicon-link"></span></a>JavaDoc</h2>
+
+<ul>
+<li><a href="http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/">Javadoc</a></li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<ul>
+<li>Check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.</li>
+</ul>
       </section>
     </div>
 
