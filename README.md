@@ -43,7 +43,7 @@ try {
 ### Execute Binary
 This method executes ffmpeg command and provides callback through FFmpegExecuteResponseHandler interface. You also need to pass command as argument
 to this method.
-e.g - To execute "ffmpeg -version" command you just need to pass "-version" as cmd parameter.
+* To execute "ffmpeg -version" command you just need to pass "-version" as cmd parameter.
 ```java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
 try {
@@ -69,6 +69,8 @@ try {
   // Handle if FFmpeg is already running
 }
 ```
+## Java Docs
+* TODO
 
 License
 ----
