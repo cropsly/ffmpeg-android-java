@@ -1,4 +1,4 @@
-[FFmpeg-Android-Java](http://hiteshsondhi88.github.io/ffmpeg-android-java/)
+[FFmpeg-Android-Java](http://hiteshsondhi88.github.io/ffmpeg-android-java/) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FFmpeg--Android--Java-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/931)
 ==============
 
 * FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi
