@@ -4,7 +4,7 @@
 #include <cpu-features.h>
 
 jstring
-Java_github_hiteshsondhi88_libffmpeg_ArmArchHelper_cpuArchFromJNI(JNIEnv* env, jobject obj)
+Java_com_github_hiteshsondhi88_libffmpeg_ArmArchHelper_cpuArchFromJNI(JNIEnv* env, jobject obj)
 {
     // Maximum we need to store here is ARM v7-neon
     // Which is 11 char long, so initializing a character array of length 11

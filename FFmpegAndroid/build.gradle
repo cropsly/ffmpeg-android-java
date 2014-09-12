@@ -5,7 +5,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "github.hiteshsondhi88.libffmpeg"
+        applicationId "com.github.hiteshsondhi88.libffmpeg"
         minSdkVersion 16
         targetSdkVersion 16
         versionCode 1
