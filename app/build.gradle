@@ -8,14 +8,18 @@ android {
         applicationId "com.github.hiteshsondhi88.sampleffmpeg"
         minSdkVersion 16
         targetSdkVersion 20
-        versionCode 1
-        versionName "1.0"
+        versionCode 21
+        versionName "0.2.1"
     }
 
     sourceSets.main {
         assets.srcDirs = ['assets']
         jniLibs.srcDirs = ['libs']
         jni.srcDirs = [] //disable automatic ndk-build
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
     buildTypes {
@@ -29,10 +33,8 @@ android {
 dependencies {
     compile 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'com.squareup.dagger:dagger:1.2.2'
-
+    compile 'com.jakewharton:butterknife:5.1.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    compile project(':FFmpegAndroid')
-
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
+    compile project(':FFmpegAndroid')
 }

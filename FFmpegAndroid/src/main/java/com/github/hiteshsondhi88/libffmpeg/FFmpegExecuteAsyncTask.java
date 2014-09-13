@@ -15,6 +15,7 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
     private final long timeout;
     private long startTime;
     private Process process;
+    private String output = "";
 
     FFmpegExecuteAsyncTask(String cmd, long timeout, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) {
         this.cmd = cmd;
@@ -62,10 +63,11 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
     @Override
     protected void onPostExecute(CommandResult commandResult) {
         if (ffmpegExecuteResponseHandler != null) {
+            output += commandResult.output;
             if (commandResult.success) {
-                ffmpegExecuteResponseHandler.onSuccess(commandResult.output);
+                ffmpegExecuteResponseHandler.onSuccess(output);
             } else {
-                ffmpegExecuteResponseHandler.onFailure(commandResult.output);
+                ffmpegExecuteResponseHandler.onFailure(output);
             }
             ffmpegExecuteResponseHandler.onFinish();
         }
@@ -87,6 +89,7 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
                 String line;
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
                 while ((line = reader.readLine()) != null) {
+                    output += line+"\n";
                     publishProgress(line);
                 }
             } catch (IOException e) {
