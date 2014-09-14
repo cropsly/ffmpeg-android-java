@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="github.hiteshsondhi88.libffmpeg">
+    package="com.github.hiteshsondhi88.libffmpeg">
 
     <application
         android:label="@string/app_name">

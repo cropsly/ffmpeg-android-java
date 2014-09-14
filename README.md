@@ -17,6 +17,10 @@ For examples and usage instructions head over to:
 * armv7-neon
 * x86
 
+## Sample
+![http://i.imgur.com/cP4WhLn.gif](http://i.imgur.com/cP4WhLn.gif)
+[Download APK](https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.2.1/app-debug.apk)
+
 ## JavaDoc
 * [Javadoc](http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/)
 
