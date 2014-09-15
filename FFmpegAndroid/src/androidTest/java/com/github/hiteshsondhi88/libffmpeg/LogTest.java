@@ -1,12 +1,10 @@
 package com.github.hiteshsondhi88.libffmpeg;
 
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import com.github.hiteshsondhi88.libffmpeg.utils.AssertionHelper;
 
 /**
  * Trying Logging everything I can Log.java class should never throw any error
  */
-@RunWith(RobolectricTestRunner.class)
 public class LogTest extends CommonTestCase {
 
     private Object[] OBJECTS_TO_TEST = {null, "", "test string", 1, 1.00123, 2.45225747946181e-072};
@@ -86,7 +84,7 @@ public class LogTest extends CommonTestCase {
                 try {
                     Log.e(obj, throwable);
                 } catch (Exception e) {
-                    AssertionHelper.assertError("Logging failed for object "+obj+" and throwable "+throwable);
+                    AssertionHelper.assertError("Logging failed for object " + obj + " and throwable " + throwable);
                 }
             }
         }
