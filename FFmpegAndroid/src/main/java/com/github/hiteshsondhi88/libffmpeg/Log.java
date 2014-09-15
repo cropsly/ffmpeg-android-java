@@ -3,11 +3,15 @@ package com.github.hiteshsondhi88.libffmpeg;
 @SuppressWarnings("unused")
 class Log {
 
-    private static final String TAG = FFmpeg.class.getSimpleName();
+    private static String TAG = FFmpeg.class.getSimpleName();
     private static boolean DEBUG = false;
 
     static void setDEBUG(boolean DEBUG) {
         Log.DEBUG = DEBUG;
+    }
+
+    static void setTAG(String tag) {
+        Log.TAG = tag;
     }
 
     static void d(Object obj) {
