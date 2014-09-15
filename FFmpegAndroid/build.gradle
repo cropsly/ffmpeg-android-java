@@ -8,8 +8,8 @@ android {
         applicationId "com.github.hiteshsondhi88.libffmpeg"
         minSdkVersion 16
         targetSdkVersion 16
-        versionCode 21
-        versionName "0.2.1"
+        versionCode 22
+        versionName "0.2.2"
     }
 
     sourceSets.main {
@@ -29,3 +29,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
