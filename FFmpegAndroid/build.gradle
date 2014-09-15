@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'robolectric'
 
 android {
     compileSdkVersion 19
