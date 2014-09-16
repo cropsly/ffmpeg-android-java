@@ -10,17 +10,14 @@ android:
     # The SDK version used to compile your project
     - android-16
 
-    - sys-img-armeabi-v7a-android-16
     - sys-img-x86-android-16
 before_install:
-  - echo no | android create avd -c 50M --force -n testarm -t android-16 --abi armeabi-v7a
   - echo no | android create avd -c 50M --force -n testx86 -t android-16 --abi x86
-  - emulator -avd testarm -no-skin -no-audio -no-window -gpu on &
   - emulator -avd testx86 -no-skin -no-audio -no-window -gpu on &
 
 before_script:
     # Make sure the emulator has started before running tests
-    - android-wait-for-emulator
+    - adb wait-for-device
 
 script:
-  - ./gradlew --info build connectedAndroidTest
+  - ./gradlew build connectedAndroidTest
