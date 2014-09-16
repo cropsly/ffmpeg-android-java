@@ -17,7 +17,8 @@ before_install:
 
 before_script:
     # Make sure the emulator has started before running tests
-    - adb wait-for-device
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
 
 script:
   - ./gradlew build connectedAndroidTest
