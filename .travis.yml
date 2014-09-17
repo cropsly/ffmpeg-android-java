@@ -11,9 +11,12 @@ android:
     - android-16
 
     - sys-img-x86-android-16
+    - sys-img-armeabi-v7a-android-16
+
 before_install:
   - echo no | android create avd -c 50M --force -n testx86 -t android-16 --abi x86
   - emulator -avd testx86 -no-skin -no-audio -no-window &
+  - EMULATOR_PID=$!
 
 before_script:
     # Make sure the emulator has started before running tests
@@ -22,3 +25,10 @@ before_script:
 
 script:
   - ./gradlew --info build connectedAndroidTest
+  # Killing previous emulator and waiting puttig it to sleep for 10 seconds
+  - kill -9 $EMULATOR_PID && sleep 10
+  - echo no | android create avd -c 50M --force -n testarm -t android-16 --abi armeabi-v7a
+  - emulator -avd testarm -no-skin -no-audio -no-window &
+  - EMULATOR_PID=$!
+  - android-wait-for-emulator
+  - ./gradlew -- build build connectedAndroidTest
