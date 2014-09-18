@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # x86 emulator
-echo no | android create avd -c 50M --force -n testx86 -t android-16 --abi x86
+echo no | android create avd -c 50M --force -n testx86 -t android-19 --abi x86
 emulator -ports 5554,5555 -partition-size 256 -avd testx86 -no-skin -no-boot-anim -no-audio -no-window &
 PID_EMU1=$!
 ./wait_for_emulator emulator-5554
