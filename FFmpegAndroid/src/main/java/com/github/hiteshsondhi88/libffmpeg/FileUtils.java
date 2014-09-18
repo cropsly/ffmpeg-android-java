@@ -69,8 +69,19 @@ class FileUtils {
     static String SHA1(String file) {
         InputStream is = null;
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
             is = new BufferedInputStream(new FileInputStream(file));
+            return SHA1(is);
+        } catch (IOException e) {
+            Log.e(e);
+        } finally {
+            Util.close(is);
+        }
+        return null;
+    }
+
+    static String SHA1(InputStream is) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
             final byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
             for (int read; (read = is.read(buffer)) != -1; ) {
                 messageDigest.update(buffer, 0, read);
