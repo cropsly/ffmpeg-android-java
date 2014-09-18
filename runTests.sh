@@ -13,5 +13,6 @@ PID_EMU2=$!
 ./wait_for_emulator emulator-5556
 
 # Running Tests
-./gradlew --stacktrace --debug build connectedCheck || exit 1
+adb logcat &
+./gradlew --info build connectedCheck || exit 1
 kill -9 $PID_EMU1 $PID_EMU2
