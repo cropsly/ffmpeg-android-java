@@ -20,5 +20,4 @@ public class CpuArchHelperTest extends TestCase {
         }
     }
 
-
 }
