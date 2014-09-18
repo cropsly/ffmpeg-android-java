@@ -1,19 +1,21 @@
 package com.github.hiteshsondhi88.libffmpeg;
 
 import android.content.Context;
-import android.util.Log;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 import java.util.Map;
 
 class FileUtils {
 
-    private static final String TAG = FileUtils.class.getSimpleName();
-
-	static final String ffmpegFileName = "ffmpeg";
+    static final String ffmpegFileName = "ffmpeg";
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
     private static final int EOF = -1;
 
@@ -39,7 +41,7 @@ class FileUtils {
 			
 			return true;
 		} catch (IOException e) {
-			Log.e(TAG, "issue in coping binary from assets to data. ", e);
+			Log.e("issue in coping binary from assets to data. ", e);
 		}
         return false;
 	}
@@ -62,5 +64,31 @@ class FileUtils {
         }
         ffmpegCommand += getFFmpeg(context);
         return ffmpegCommand;
+    }
+
+    static String SHA1(String file) {
+        InputStream is = null;
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
+            is = new BufferedInputStream(new FileInputStream(file));
+            final byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+            for (int read; (read = is.read(buffer)) != -1; ) {
+                messageDigest.update(buffer, 0, read);
+            }
+
+            Formatter formatter = new Formatter();
+            // Convert the byte to hex format
+            for (final byte b : messageDigest.digest()) {
+                formatter.format("%02x", b);
+            }
+            return formatter.toString();
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(e);
+        } catch (IOException e) {
+            Log.e(e);
+        } finally {
+            Util.close(is);
+        }
+        return null;
     }
 }

@@ -2,24 +2,19 @@ package com.github.hiteshsondhi88.libffmpeg;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 
 import java.io.File;
-
-import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 
 class FFmpegLoadLibraryAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
     private final String cpuArchNameFromAssets;
     private final FFmpegLoadBinaryResponseHandler ffmpegLoadBinaryResponseHandler;
     private final Context context;
-    private final FFmpeg ffmpeg;
 
-    FFmpegLoadLibraryAsyncTask(Context context, String cpuArchNameFromAssets, FFmpegLoadBinaryResponseHandler ffmpegLoadBinaryResponseHandler, FFmpeg ffmpeg) {
+    FFmpegLoadLibraryAsyncTask(Context context, String cpuArchNameFromAssets, FFmpegLoadBinaryResponseHandler ffmpegLoadBinaryResponseHandler) {
         this.context = context;
         this.cpuArchNameFromAssets = cpuArchNameFromAssets;
         this.ffmpegLoadBinaryResponseHandler = ffmpegLoadBinaryResponseHandler;
-        this.ffmpeg = ffmpeg;
     }
 
     @Override
@@ -63,14 +58,6 @@ class FFmpegLoadLibraryAsyncTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     private boolean isDeviceFFmpegVersionOld() {
-        String ffmpegDeviceVersion;
-        try {
-            ffmpegDeviceVersion = ffmpeg.getDeviceFFmpegVersion();
-        } catch (FFmpegCommandAlreadyRunningException e) {
-            Log.e("FFmpeg already running", e);
-            // return false, ffmpeg is already running so we cannot replace the existing binary file
-            return false;
-        }
-        return !TextUtils.isEmpty(ffmpegDeviceVersion) && !ffmpegDeviceVersion.equals(ffmpeg.getLibraryFFmpegVersion());
+        return CpuArch.fromString(FileUtils.SHA1(FileUtils.getFFmpeg(context))).equals(CpuArch.NONE);
     }
 }

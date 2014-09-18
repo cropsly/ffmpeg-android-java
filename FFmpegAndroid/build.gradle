@@ -8,8 +8,8 @@ android {
         applicationId "com.github.hiteshsondhi88.libffmpeg"
         minSdkVersion 16
         targetSdkVersion 16
-        versionCode 22
-        versionName "0.2.2"
+        versionCode 23
+        versionName "0.2.3"
     }
 
     sourceSets.main {
