@@ -14,4 +14,4 @@ android:
     - sys-img-armeabi-v7a-android-16
 
 script:
-  - ./runTests.sh
+  - ./runTests.sh || exit 1
