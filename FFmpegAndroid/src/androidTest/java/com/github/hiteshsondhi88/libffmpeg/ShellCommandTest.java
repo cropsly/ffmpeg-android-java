@@ -44,7 +44,7 @@ public class ShellCommandTest extends CommonTestCase {
 
     public void testRunWaitFor() throws Exception {
         ShellCommand shellCommand = new ShellCommand();
-        CommandResult commandResult = shellCommand.runWaitFor("ls /sdcard/");
+        CommandResult commandResult = shellCommand.runWaitFor("ls");
         assertNotNull(commandResult);
         assertEquals(true, commandResult.success);
         assertThat(commandResult.output).isNotEmpty();

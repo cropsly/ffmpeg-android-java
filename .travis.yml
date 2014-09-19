@@ -1,5 +1,6 @@
 language: android
 android:
+  update_sdk: true
   components:
     - platform-tools
     - tools
@@ -9,16 +10,12 @@ android:
 
     # The SDK version used to compile your project
     - android-16
+    - android-L    
 
     - sys-img-x86-android-16
-before_install:
-  - echo no | android create avd -c 50M --force -n testx86 -t android-16 --abi x86
-  - emulator -avd testx86 -no-skin -no-audio -no-window -gpu on &
-
-before_script:
-    # Make sure the emulator has started before running tests
-    - android-wait-for-emulator
-    - adb shell input keyevent 82 &
+    - sys-img-armeabi-v7a-android-16
+    - sys-img-armeabi-v7a-android-l
+    - sys-img-x86-android-l
 
 script:
-  - ./gradlew --info build connectedAndroidTest
+  - ./runTests.sh || exit 1
