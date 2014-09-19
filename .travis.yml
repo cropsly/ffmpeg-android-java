@@ -12,8 +12,6 @@ android:
 
     - sys-img-x86-android-16
     - sys-img-armeabi-v7a-android-16
-    - sys-img-armeabi-v7a-android-l
-    - sys-img-x86-android-l
 
 script:
   - ./runTests.sh || exit 1
