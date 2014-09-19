@@ -30,5 +30,5 @@ function run_test() {
 # x86 android-16
 run_test x86 android-16
 
-# armeabi-v7a android-L 
-run_test armeabi-v7a android-L
+# armeabi-v7a android-16
+run_test armeabi-v7a android-16
