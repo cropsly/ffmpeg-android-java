@@ -20,4 +20,4 @@ create_emulator x86 android-16 5554 5555
 create_emulator armeabi-v7a android-16 5556 5557 
 
 # Running Tests
-./gradlew --info build connectedCheck || exit 1
+./gradlew --info clean build connectedCheck || exit 1
