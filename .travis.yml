@@ -1,5 +1,6 @@
 language: android
 android:
+  update_sdk: true
   components:
     - platform-tools
     - tools
@@ -9,6 +10,7 @@ android:
 
     # The SDK version used to compile your project
     - android-16
+    - android-L    
 
     - sys-img-x86-android-16
     - sys-img-armeabi-v7a-android-16
