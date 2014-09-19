@@ -11,7 +11,7 @@ function run_test() {
   emulator -partition-size 256 -avd ${emulator_name} -no-skin -no-boot-anim -no-audio -no-window -gpu on &
   EMU_PID=$!
   ./wait_for_emulator || exit 1
-  adb -v time logcat -s FFmpegInstrumentationTest &
+  adb logcat -v time -s FFmpegInstrumentationTest &
   LOGCAT_PID=$!
   # Running Tests
   ./gradlew --info build connectedCheck || exit 1
