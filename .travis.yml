@@ -13,7 +13,7 @@ android:
     - android-L    
 
     - sys-img-x86-android-16
-    - sys-img-armeabi-v7a-android-l
+    - sys-img-armeabi-v7a-android-16
 
 script:
   - ./runTests.sh || exit 1
