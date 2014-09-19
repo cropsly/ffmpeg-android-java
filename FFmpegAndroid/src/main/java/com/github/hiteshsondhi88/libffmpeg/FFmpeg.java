@@ -53,7 +53,7 @@ public class FFmpeg implements FFmpegInterface {
         }
 
         if (!TextUtils.isEmpty(cpuArchNameFromAssets)) {
-            ffmpegLoadLibraryAsyncTask = new FFmpegLoadLibraryAsyncTask(context, cpuArchNameFromAssets, ffmpegLoadBinaryResponseHandler, this);
+            ffmpegLoadLibraryAsyncTask = new FFmpegLoadLibraryAsyncTask(context, cpuArchNameFromAssets, ffmpegLoadBinaryResponseHandler);
             ffmpegLoadLibraryAsyncTask.execute();
         } else {
             throw new FFmpegNotSupportedException("Device not supported");
