@@ -89,6 +89,10 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
                 String line;
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
                 while ((line = reader.readLine()) != null) {
+                    if (isCancelled()) {
+                        return;
+                    }
+
                     output += line+"\n";
                     publishProgress(line);
                 }
