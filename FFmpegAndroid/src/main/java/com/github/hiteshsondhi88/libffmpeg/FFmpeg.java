@@ -1,10 +1,10 @@
 package com.github.hiteshsondhi88.libffmpeg;
 
-import android.content.Context;
-import android.text.TextUtils;
-
 import java.util.Map;
-
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.text.TextUtils;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
@@ -60,15 +60,13 @@ public class FFmpeg implements FFmpegInterface {
         }
     }
 
-    @Override
+    @SuppressLint("NewApi") @Override
     public void execute(Map<String, String> environvenmentVars, String cmd, FFmpegExecuteResponseHandler ffmpegExecuteResponseHandler) throws FFmpegCommandAlreadyRunningException {
-        if (ffmpegExecuteAsyncTask != null && !ffmpegExecuteAsyncTask.isProcessCompleted()) {
-            throw new FFmpegCommandAlreadyRunningException("FFmpeg command is already running, you are only allowed to run single command at a time");
-        }
+       
         if (!TextUtils.isEmpty(cmd)) {
             String ffmpegCmd = FileUtils.getFFmpeg(context, environvenmentVars) + " "+ cmd;
-            ffmpegExecuteAsyncTask = new FFmpegExecuteAsyncTask(ffmpegCmd, timeout, ffmpegExecuteResponseHandler);
-            ffmpegExecuteAsyncTask.execute();
+            FFmpegExecuteAsyncTask ffmpegExecuteAsyncTask = new FFmpegExecuteAsyncTask(ffmpegCmd, timeout, ffmpegExecuteResponseHandler);
+            ffmpegExecuteAsyncTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
             throw new IllegalArgumentException("shell command cannot be empty");
         }
