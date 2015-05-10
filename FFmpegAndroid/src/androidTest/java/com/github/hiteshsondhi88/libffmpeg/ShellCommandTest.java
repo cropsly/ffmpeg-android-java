@@ -14,7 +14,7 @@ public class ShellCommandTest extends CommonTestCase {
 
     public void testRun() throws Exception {
         ShellCommand shellCommand = new ShellCommand();
-        final Process process = shellCommand.run("logcat");
+        final Process process = shellCommand.run(new String[] {"logcat"});
         assertNotNull(process);
         assertEquals(false, Util.isProcessCompleted(process));
 
@@ -44,7 +44,7 @@ public class ShellCommandTest extends CommonTestCase {
 
     public void testRunWaitFor() throws Exception {
         ShellCommand shellCommand = new ShellCommand();
-        CommandResult commandResult = shellCommand.runWaitFor("ls");
+        CommandResult commandResult = shellCommand.runWaitFor(new String[] {"ls"});
         assertNotNull(commandResult);
         assertEquals(true, commandResult.success);
         assertThat(commandResult.output).isNotEmpty();
