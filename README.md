@@ -1,6 +1,8 @@
 [FFmpeg-Android-Java](http://hiteshsondhi88.github.io/ffmpeg-android-java/) [![Build Status](https://travis-ci.org/hiteshsondhi88/ffmpeg-android-java.svg?branch=master)](https://travis-ci.org/hiteshsondhi88/ffmpeg-android-java) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FFmpeg--Android--Java-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/931) 
 ==============
 
+[![Join the chat at https://gitter.im/hiteshsondhi88/ffmpeg-android-java](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hiteshsondhi88/ffmpeg-android-java?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## About 
 [FFmpeg Android java](http://hiteshsondhi88.github.io/ffmpeg-android-java/) is a java library that simplifies your task of using ffmpeg in Android project which I've compiled using [FFmpeg-Android](http://hiteshsondhi88.github.io/ffmpeg-android/)
 
