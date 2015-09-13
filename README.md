@@ -31,3 +31,7 @@ For examples and usage instructions head over to:
 
 ## HIRE US
 * Get in touch with us - http://www.writingminds.com
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hiteshsondhi88/ffmpeg-android-java/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
