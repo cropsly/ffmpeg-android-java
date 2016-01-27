@@ -24,7 +24,7 @@ For examples and usage instructions head over to:
 * [Download APK](https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.2.3/app-debug.apk)
 
 ## JavaDoc
-* [Javadoc](http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/)
+* [Javadoc](http://writingminds.github.io/ffmpeg-android-java/docs/)
 
 ## License
 * Check file LICENSE.GPLv3 and Make sure to follow the licensing terms and conditions of the project and the software used to build the project.
