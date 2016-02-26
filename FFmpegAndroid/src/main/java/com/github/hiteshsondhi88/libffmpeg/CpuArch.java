@@ -3,9 +3,9 @@ package com.github.hiteshsondhi88.libffmpeg;
 import android.text.TextUtils;
 
 enum CpuArch {
-    x86("1b3daf0402c38ec0019ec436d71a1389514711bd"),
-    ARMv7("e27cf3c432b121896fc8af2d147eff88d3074dd5"),
-    ARMv7_NEON("9463c40e898c53dcac59b8ba39cfd590e2f1b1bf"),
+    x86("dc9b832217acea7c7d8453d0f0d64cb6072323b1"),
+    ARMv7("23744779c593150a272d67325962c3b3eae63b6a"),
+    ARMv7_NEON("8b9c8d5e758c4f5a2ff26419787a89f0dd8911c1"),
     NONE(null);
 
     private String sha1;
