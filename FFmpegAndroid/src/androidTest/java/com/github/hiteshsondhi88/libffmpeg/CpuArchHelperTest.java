@@ -14,7 +14,7 @@ public class CpuArchHelperTest extends TestCase {
         if (Build.CPU_ABI.equals(CpuArchHelper.getx86CpuAbi()) || Build.CPU_ABI.equals(CpuArchHelper.getx86_64CpuAbi())) {
             assertEquals(cpuArch, CpuArch.x86);
         } else if (Build.CPU_ABI.equals(CpuArchHelper.getArmeabiv7CpuAbi())) {
-            assertThat(cpuArch == CpuArch.ARMv7 || cpuArch == CpuArch.ARMv7_NEON).isTrue();
+            assertEquals(cpuArch, CpuArch.ARMv7);
         } else if (Build.CPU_ABI.equals(CpuArchHelper.getArm64CpuAbi())) {
             assertEquals(cpuArch, CpuArch.ARMv7);
         }else {

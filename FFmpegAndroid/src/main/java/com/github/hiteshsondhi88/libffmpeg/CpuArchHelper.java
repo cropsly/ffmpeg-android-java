@@ -17,9 +17,6 @@ class CpuArchHelper {
                 // check if device is arm v7
                 if (cpuNativeArchHelper.isARM_v7_CPU(archInfo)) {
                     // check if device is neon
-                    if (cpuNativeArchHelper.isNeonSupported(archInfo)) {
-                        return CpuArch.ARMv7_NEON;
-                    }
                     return CpuArch.ARMv7;
                 }
                 // check if device is arm64 which is supported by ARMV7
@@ -41,7 +38,7 @@ class CpuArchHelper {
     static String getArm64CpuAbi() {
         return "arm64-v8a";
     }
-    
+
     static String getArmeabiv7CpuAbi() {
         return "armeabi-v7a";
     }
