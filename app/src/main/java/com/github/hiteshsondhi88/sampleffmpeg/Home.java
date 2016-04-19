@@ -75,7 +75,7 @@ public class Home extends Activity implements View.OnClickListener {
         }
     }
 
-    private void execFFmpegBinary(final String command) {
+    private void execFFmpegBinary(final String[] command) {
         try {
             ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
                 @Override
@@ -142,8 +142,9 @@ public class Home extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.run_command:
-                String command = commandEditText.getText().toString();
-                if (!TextUtils.isEmpty(command)) {
+                String cmd = commandEditText.getText().toString();
+                String[] command = cmd.split(" ");
+                if (command.length != 0) {
                     execFFmpegBinary(command);
                 } else {
                     Toast.makeText(Home.this, getString(R.string.empty_command_toast), Toast.LENGTH_LONG).show();

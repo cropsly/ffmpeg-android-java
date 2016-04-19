@@ -4,7 +4,7 @@ import java.io.IOException;
 
 class ShellCommand {
 
-    Process run(String commandString) {
+    Process run(String[] commandString) {
         Process process = null;
         try {
             process = Runtime.getRuntime().exec(commandString);
@@ -14,7 +14,7 @@ class ShellCommand {
         return process;
     }
 
-    CommandResult runWaitFor(String s) {
+    CommandResult runWaitFor(String[] s) {
         Process process = run(s);
 
         Integer exitValue = null;
