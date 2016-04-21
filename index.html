@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="FFmpeg Android Java : Android java library for FFmpeg binary compiled using https://github.com/hiteshsondhi88/ffmpeg-android">
+    <meta name="description" content="FFmpeg Android Java : Android java library for FFmpeg binary compiled using https://github.com/writingminds/ffmpeg-android">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -18,18 +18,18 @@
         <header class="inner">
           <div id="github_banner_id">
             <ul>
-              <li><a class="github_banner" href="https://github.com/hiteshsondhi88/ffmpeg-android-java">Fork me on GitHub</a></li>
-              <li><a class="github_banner" href="http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/">Java Docs</a></li>
+              <li><a class="github_banner" href="https://github.com/writingminds/ffmpeg-android-java">Fork me on GitHub</a></li>
+              <li><a class="github_banner" href="http://writingminds.github.io/ffmpeg-android-java/docs/">Java Docs</a></li>
               <li><a class="wm_banner" href="http://www.writingminds.com">HIRE US</a></li>
             </ul>
           </div>
 
           <h1 id="project_title">FFmpeg Android Java</h1>
-          <h2 id="project_tagline">Android java library for FFmpeg binary compiled using https://github.com/hiteshsondhi88/ffmpeg-android</h2>
+          <h2 id="project_tagline">Android java library for FFmpeg binary compiled using https://github.com/writingminds/ffmpeg-android</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/hiteshsondhi88/ffmpeg-android-java/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/hiteshsondhi88/ffmpeg-android-java/tarball/master">Download this project as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/writingminds/ffmpeg-android-java/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/writingminds/ffmpeg-android-java/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -38,25 +38,27 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ffmpeg-android-java" class="anchor" href="#ffmpeg-android-java"><span class="octicon octicon-link"></span></a><a href="http://hiteshsondhi88.github.io/ffmpeg-android-java/">FFmpeg Android Java</a>
+<a name="ffmpeg-android-java" class="anchor" href="#ffmpeg-android-java"><span class="octicon octicon-link"></span></a><a href="http://writingminds.github.io/ffmpeg-android-java/">FFmpeg Android Java</a>
 </h1>
 
 <ul>
-<li>FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi</li>
-<li>Supports Android L</li>
+<li>FFmpeg for Android compiled with x264, libass, fontconfig, freetype, fribidi and LAME</li>
+<li>Supports Android 4.1+</li>
 </ul><h2>
 <a name="supported-architecture" class="anchor" href="#supported-architecture"><span class="octicon octicon-link"></span></a>Supported Architecture</h2>
 
 <ul>
 <li>armv7</li>
 <li>armv7-neon</li>
+<li>armv8</li>
 <li>x86</li>
+<li>x86_64</li>
 </ul>
 <h2><a name="adding-library-to-project-android-studio" class="anchor" href="#adding-library-to-project-android-studio"><span class="octicon octicon-link"></span></a>Adding Library to Project</h2>
 
   <ul>
     <li>
-      Download and copy <a href="https://oss.sonatype.org/content/repositories/releases/com/github/hiteshsondhi88/libffmpeg/FFmpegAndroid/0.2.5/FFmpegAndroid-0.2.5.aar">AAR File</a> to app/libs
+      Download and copy <a href="https://oss.sonatype.org/content/repositories/releases/com/writingminds/FFmpegAndroid/0.3.2/FFmpegAndroid-0.3.2.aar">AAR File</a> to app/libs
       and add to your app/build.gradle file</br>
       <div class="highlight highlight-groovy">
         <pre><span class="n">repositories</span> <span class="o">{</span>
@@ -72,13 +74,13 @@
     </li>
     <li>
       Or Grab via gradle
-      <pre><code>compile 'com.github.hiteshsondhi88.libffmpeg:FFmpegAndroid:0.2.5'</code></pre>
+      <pre><code>compile 'com.writingminds:FFmpegAndroid:0.3.2'</code></pre>
     </li>
     <li>
       Or Maven<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;com.github.hiteshsondhi88.libffmpeg&lt;/groupId&gt;
+  &lt;groupId&gt;com.writingminds&lt;/groupId&gt;
   &lt;artifactId&gt;FFmpegAndroid&lt;/artifactId&gt;
-  &lt;version&gt;0.2.5&lt;/version&gt;
+  &lt;version&gt;0.3.2&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
     </li>
   </ul>
@@ -168,14 +170,14 @@ to this method.</p>
 <a name="sample_application" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Sample Application</h2>
 <img src="http://i.imgur.com/cP4WhLn.gif" alt="Sample ffmpeg library gif"/>
 <ul>
-<li><a href="https://github.com/hiteshsondhi88/ffmpeg-android-java/releases/download/v0.2.5/app-debug.apk">Download APK</a></li>
+<li><a href="https://github.com/writingminds/ffmpeg-android-java/releases/download/v0.3.2/app-debug.apk">Download APK</a></li>
 </ul>
 
 <h2>
 <a name="javadoc" class="anchor" href="#javadoc"><span class="octicon octicon-link"></span></a>JavaDoc</h2>
 
 <ul>
-<li><a href="http://hiteshsondhi88.github.io/ffmpeg-android-java/docs/">Javadoc</a></li>
+<li><a href="http://writingminds.github.io/ffmpeg-android-java/docs/">Javadoc</a></li>
 </ul><h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
