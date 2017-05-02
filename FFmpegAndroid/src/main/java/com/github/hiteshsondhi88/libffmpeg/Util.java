@@ -13,7 +13,7 @@ import java.io.OutputStream;
 class Util {
 
     static boolean isDebug(Context context) {
-        return (0 != (context.getApplicationContext().getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE));
+        return (0 != (context.getApplicationContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
     }
 
     static void close(InputStream inputStream) {
