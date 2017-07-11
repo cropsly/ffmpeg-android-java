@@ -7,6 +7,7 @@ enum CpuArch {
     ARMv7("51cbc41b813661305ee58652a1c36d8bb0141467"),
     NONE(null);
 
+
     private String sha1;
 
     CpuArch(String sha1) {
