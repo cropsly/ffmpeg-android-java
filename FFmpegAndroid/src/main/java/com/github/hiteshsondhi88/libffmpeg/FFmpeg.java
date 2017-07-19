@@ -111,7 +111,9 @@ public class FFmpeg implements FFmpegInterface {
 
     @Override
     public boolean killRunningProcesses() {
-        return Util.killAsync(ffmpegLoadLibraryAsyncTask) || Util.killAsync(ffmpegExecuteAsyncTask);
+        boolean status = Util.killAsync(ffmpegLoadLibraryAsyncTask) || Util.killAsync(ffmpegExecuteAsyncTask);
+        ffmpegExecuteAsyncTask = null;
+        return status;
     }
 
     @Override
