@@ -53,8 +53,13 @@ class Util {
     }
 
     static void destroyProcess(Process process) {
-        if (process != null)
-            process.destroy();
+        if (process != null) {
+            try {
+                process.destroy();
+            } catch (Exception e) {
+                Log.e("process destroy error", e);
+            }
+        }
     }
 
     static boolean killAsync(AsyncTask asyncTask) {

@@ -12,7 +12,7 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedExceptio
 @SuppressWarnings("unused")
 public class FFmpeg implements FFmpegInterface {
 
-    private final Context context;
+    private final FFmpegContextProvider context;
     private FFmpegExecuteAsyncTask ffmpegExecuteAsyncTask;
     private FFmpegLoadLibraryAsyncTask ffmpegLoadLibraryAsyncTask;
 
@@ -21,14 +21,14 @@ public class FFmpeg implements FFmpegInterface {
 
     private static FFmpeg instance = null;
 
-    private FFmpeg(Context context) {
-        this.context = context.getApplicationContext();
-        Log.setDEBUG(Util.isDebug(this.context));
+    private FFmpeg(FFmpegContextProvider contextProvider) {
+        this.context = contextProvider;
+        Log.setDEBUG(Util.isDebug(this.context.provide()));
     }
 
-    public static FFmpeg getInstance(Context context) {
+    public static FFmpeg getInstance(FFmpegContextProvider contextProvider) {
         if (instance == null) {
-            instance = new FFmpeg(context);
+            instance = new FFmpeg(contextProvider);
         }
         return instance;
     }
@@ -63,7 +63,7 @@ public class FFmpeg implements FFmpegInterface {
             throw new FFmpegCommandAlreadyRunningException("FFmpeg command is already running, you are only allowed to run single command at a time");
         }
         if (cmd.length != 0) {
-            String[] ffmpegBinary = new String[] { FileUtils.getFFmpeg(context, environvenmentVars) };
+            String[] ffmpegBinary = new String[] { FileUtils.getFFmpeg(context.provide(), environvenmentVars) };
             String[] command = concatenate(ffmpegBinary, cmd);
             ffmpegExecuteAsyncTask = new FFmpegExecuteAsyncTask(command , timeout, ffmpegExecuteResponseHandler);
             ffmpegExecuteAsyncTask.execute();
@@ -92,7 +92,7 @@ public class FFmpeg implements FFmpegInterface {
     @Override
     public String getDeviceFFmpegVersion() throws FFmpegCommandAlreadyRunningException {
         ShellCommand shellCommand = new ShellCommand();
-        CommandResult commandResult = shellCommand.runWaitFor(new String[] { FileUtils.getFFmpeg(context), "-version" });
+        CommandResult commandResult = shellCommand.runWaitFor(new String[] { FileUtils.getFFmpeg(context.provide()), "-version" });
         if (commandResult.success) {
             return commandResult.output.split(" ")[2];
         }
@@ -102,7 +102,7 @@ public class FFmpeg implements FFmpegInterface {
 
     @Override
     public String getLibraryFFmpegVersion() {
-        return context.getString(R.string.shipped_ffmpeg_version);
+        return context.provide().getString(R.string.shipped_ffmpeg_version);
     }
 
     @Override
