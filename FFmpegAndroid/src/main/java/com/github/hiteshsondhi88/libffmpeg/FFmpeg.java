@@ -1,6 +1,5 @@
 package com.github.hiteshsondhi88.libffmpeg;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import java.lang.reflect.Array;
@@ -120,5 +119,15 @@ public class FFmpeg implements FFmpegInterface {
         if (timeout >= MINIMUM_TIMEOUT) {
             this.timeout = timeout;
         }
+    }
+
+    @Override
+    public FFmpegObserver whenFFmpegIsReady(Runnable onReady, int timeout) {
+        return Util.observeOnce(new Util.ObservePredicate() {
+            @Override
+            public Boolean isReadyToProceed() {
+                return !isFFmpegCommandRunning();
+            }
+        }, onReady, timeout);
     }
 }
