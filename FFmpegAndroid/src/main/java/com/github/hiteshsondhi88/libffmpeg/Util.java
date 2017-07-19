@@ -78,11 +78,10 @@ class Util {
     }
 
     public interface ObservePredicate {
-        @Nullable
         Boolean isReadyToProceed();
     }
 
-    public static FFmpegObserver observeOnce(@NonNull final ObservePredicate predicate, @NonNull final Runnable run, final int timeout) {
+    public static FFmpegObserver observeOnce(final ObservePredicate predicate, final Runnable run, final int timeout) {
         final android.os.Handler observer = new android.os.Handler();
 
         // Enable this to detect neverending observers
