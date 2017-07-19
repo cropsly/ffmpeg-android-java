@@ -91,6 +91,7 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
                 while ((line = reader.readLine()) != null) {
                     if (isCancelled()) {
                         process.destroy();
+                        process.waitFor();
                         return;
                     }
 
