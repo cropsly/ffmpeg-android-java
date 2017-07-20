@@ -1,5 +1,6 @@
 package com.github.hiteshsondhi88.libffmpeg;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import java.lang.reflect.Array;
@@ -28,6 +29,19 @@ public class FFmpeg implements FFmpegInterface {
     public static FFmpeg getInstance(FFmpegContextProvider contextProvider) {
         if (instance == null) {
             instance = new FFmpeg(contextProvider);
+        }
+        return instance;
+    }
+
+    @Deprecated
+    public static FFmpeg getInstance(final Context context) {
+        if (instance == null) {
+            instance = new FFmpeg(new FFmpegContextProvider() {
+                @Override
+                public Context provide() {
+                    return context;
+                }
+            });
         }
         return instance;
     }
@@ -71,7 +85,7 @@ public class FFmpeg implements FFmpegInterface {
         }
     }
 
-    public <T> T[] concatenate (T[] a, T[] b) {
+    private static <T> T[] concatenate (T[] a, T[] b) {
         int aLen = a.length;
         int bLen = b.length;
 

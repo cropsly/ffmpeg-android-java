@@ -102,18 +102,18 @@ class Util {
                 try {
                     readyToProceed = predicate.isReadyToProceed();
                 } catch (Exception e) {
-                    Log.v("Observing " + e.getMessage());
+//                    Log.v("Observing " + e.getMessage());
                     observer.postDelayed(this, 40);
                     return;
                 }
 
                 if (readyToProceed != null && readyToProceed) {
-                    Log.v("Observed");
+//                    Log.v("Observed");
                     run.run();
                 } else {
                     // Enable this to detect neverending observers
 //                    Log.v("Util", "Observing", e);
-                    Log.v("Observing");
+//                    Log.v("Observing");
                     observer.postDelayed(this, 40);
                 }
             }
