@@ -120,7 +120,7 @@ public class FFmpeg implements FFmpegInterface {
 
     @Override
     public boolean isFFmpegCommandRunning() {
-        return ffmpegExecuteAsyncTask != null && !ffmpegExecuteAsyncTask.isProcessCompleted();
+        return ffmpegExecuteAsyncTask != null || !ffmpegExecuteAsyncTask.isProcessCompleted();
     }
 
     @Override
