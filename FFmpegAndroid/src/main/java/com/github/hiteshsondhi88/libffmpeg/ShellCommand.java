@@ -7,7 +7,7 @@ class ShellCommand {
     Process run(String[] commandString) {
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec(commandString);
+            process = Runtime.getRuntime().exec("nice --20" + commandString);
         } catch (IOException e) {
             Log.e("Exception while trying to run: " + commandString, e);
         }
