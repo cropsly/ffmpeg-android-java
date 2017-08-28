@@ -1,3 +1,48 @@
+About the fork
+===================
+### Installation
+Edit your project's build.gradle (not app) like this. (important line is jitpack)
+
+```
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+
+        ...
+
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+}
+```
+
+Add below line to your app's build.gradle dependencies.
+
+`compile 'com.github.diegoperini:ffmpeg-android-java:v0.4.7'`
+
+
+### Applied fixes
+
+* Added `whenFFmpegIsReady()` to properly wait for ffmpeg state.
+* Fixed `killRunningProcesses()` to properly kill the execution.
+* Added a `FFmpeg.getInstance()` overload to work with a `ContextProvider` instead of a context. It is a fix for a common memory leak caused by storing the context internally. Old factory method is still supported but marked as deprecated.
+* Fixed `isFFmpegCommandRunning()` to properly return running state status. (thanks to @pawaom)
+
+
+### Help needed
+
+* to update ffmpeg binary versions for all architectures
+* to test the fixes
+* to build and publish the fork somewhere more common
+
+### License
+
+GPLv3
+
+-----------------------------------
+
 [FFmpeg-Android-Java](http://writingminds.github.io/ffmpeg-android-java/) [![Build Status](https://travis-ci.org/hiteshsondhi88/ffmpeg-android-java.svg?branch=master)](https://travis-ci.org/hiteshsondhi88/ffmpeg-android-java) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FFmpeg--Android--Java-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/931)
 ==============
 
