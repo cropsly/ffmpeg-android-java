@@ -20,7 +20,7 @@ allprojects {
 
 Add below line to your app's build.gradle dependencies.
 
-`compile 'com.github.diegoperini:ffmpeg-android-java:v0.4.7'`
+`compile 'com.github.diegoperini:ffmpeg-android-java:v0.4.9'`
 
 
 ### Applied fixes
