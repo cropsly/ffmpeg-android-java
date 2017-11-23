@@ -31,10 +31,21 @@ android {
 }
 
 dependencies {
-    compile 'com.squareup.dagger:dagger-compiler:1.2.2'
-    compile 'com.squareup.dagger:dagger:1.2.2'
-    compile 'com.jakewharton:butterknife:5.1.2'
+    // dagger 2 for dependency injection
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    // butterknife for view binding
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
     compile project(':FFmpegAndroid')
+
+    // app compat and design support library
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:support-v13:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
 }

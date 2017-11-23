@@ -2,36 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".Home"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Home">
 
-    <EditText
-        android:id="@+id/command"
+    <include layout="@layout/toolbar_layout" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minLines="3"
-        android:hint="@string/ffmpeg_cmd_hint"
-        android:gravity="start" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
-        android:id="@+id/run_command"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/run"
-        android:padding="@dimen/button_padding"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/command_output"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:id="@+id/command"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:hint="@string/ffmpeg_cmd_hint"
+                android:minLines="3" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/run_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/command_output"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

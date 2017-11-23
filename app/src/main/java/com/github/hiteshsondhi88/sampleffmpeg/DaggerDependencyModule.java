@@ -6,11 +6,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 
-@Module(
-        injects = Home.class
-)
+@Module
 @SuppressWarnings("unused")
 public class DaggerDependencyModule {
 
@@ -20,9 +19,9 @@ public class DaggerDependencyModule {
         this.context = context;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     FFmpeg provideFFmpeg() {
         return FFmpeg.getInstance(context.getApplicationContext());
     }
-
 }
