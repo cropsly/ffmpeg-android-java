@@ -1,4 +1,4 @@
-package com.github.hiteshsondhi88.sampleffmpeg;
+package com.github.hiteshsondhi88.sampleffmpeg.core;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.github.hiteshsondhi88.sampleffmpeg.R;
 
 import javax.inject.Inject;
 
@@ -53,6 +55,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Context getContext() {
         return this;
     }
-
-    protected abstract void reloadData();
 }

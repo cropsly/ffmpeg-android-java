@@ -1,7 +1,10 @@
-package com.github.hiteshsondhi88.sampleffmpeg;
+package com.github.hiteshsondhi88.sampleffmpeg.core;
 
 import android.app.Application;
-import android.content.Context;
+
+import com.github.hiteshsondhi88.sampleffmpeg.di.component.ApplicationComponent;
+import com.github.hiteshsondhi88.sampleffmpeg.di.component.DaggerApplicationComponent;
+import com.github.hiteshsondhi88.sampleffmpeg.di.module.DaggerDependencyModule;
 
 /**
  * Created by bedi on 01/03/17.

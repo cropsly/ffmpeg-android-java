@@ -12,10 +12,11 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegLoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+import com.github.hiteshsondhi88.sampleffmpeg.screens.home.HomeActivity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<Home> {
+public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<HomeActivity> {
 
     private static final String TAG = FFmpegInstrumentationTest.class.getSimpleName();
 
@@ -23,7 +24,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
     FFmpeg ffmpeg;
 
     public FFmpegInstrumentationTest() {
-        super(Home.class);
+        super(HomeActivity.class);
     }
 
     @Override

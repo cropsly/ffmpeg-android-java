@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Home">
+    tools:context=".screens.home.HomeActivity">
 
     <include layout="@layout/toolbar_layout" />
 
@@ -16,18 +16,13 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/command"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/command"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:hint="@string/ffmpeg_cmd_hint"
-                android:minLines="3" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="@string/ffmpeg_cmd_hint"
+            android:minLines="3" />
 
         <Button
             android:id="@+id/run_command"
