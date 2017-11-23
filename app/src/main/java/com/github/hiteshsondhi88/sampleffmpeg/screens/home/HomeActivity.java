@@ -31,7 +31,7 @@ public class HomeActivity extends BaseActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
 
     @Inject
-    FFmpeg ffmpeg;
+    public FFmpeg ffmpeg;
 
     @BindView(R.id.command)
     EditText commandEditText;

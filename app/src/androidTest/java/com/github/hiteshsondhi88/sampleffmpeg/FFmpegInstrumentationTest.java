@@ -124,21 +124,22 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
     public void testLibass() {
         File outass = new File(getFFmpegFilesDir(), "output.ass");
-        checkFFmpegCommon("-y -i "+getSrtSampleFile()+" "+outass.getAbsolutePath(), outass);
+        checkFFmpegCommon("-y -i " + getSrtSampleFile() + " " + outass.getAbsolutePath(), outass);
     }
 
     private void checkFFmpegConvertUsingx264(File inputFile, File outputFile) {
-        checkFFmpegCommon("-y -i "+inputFile.getAbsolutePath()+" -c:v libx264 -preset ultrafast "+outputFile.getAbsolutePath(), outputFile);
+        checkFFmpegCommon("-y -i " + inputFile.getAbsolutePath() + " -c:v libx264 -preset ultrafast " + outputFile.getAbsolutePath(), outputFile);
     }
 
     private void checkFFmpegConvertCommon(File inputFile, File outputFile) {
-        checkFFmpegCommon("-y -i "+inputFile.getAbsolutePath()+" "+outputFile.getAbsolutePath(), outputFile);
+        checkFFmpegCommon("-y -i " + inputFile.getAbsolutePath() + " " + outputFile.getAbsolutePath(), outputFile);
     }
 
     private void checkFFmpegCommon(final String cmd, final File outputFile) {
-        Log.d(TAG, "start : "+outputFile.getAbsolutePath());
+        Log.d(TAG, "start : " + outputFile.getAbsolutePath());
         try {
-            ffmpeg.execute(cmd, new FFmpegExecuteResponseHandler() {
+            String[] cmdArray = {cmd};
+            ffmpeg.execute(cmdArray, new FFmpegExecuteResponseHandler() {
 
                 @Override
                 public void onStart() {
@@ -147,7 +148,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
                 @Override
                 public void onProgress(String message) {
-                    Log.d(TAG, "progress : "+message);
+                    Log.d(TAG, "progress : " + message);
                 }
 
                 @Override
@@ -162,7 +163,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
                 @Override
                 public void onFinish() {
-                    Log.d(TAG, "done : "+outputFile.getAbsolutePath());
+                    Log.d(TAG, "done : " + outputFile.getAbsolutePath());
                     synchronized (FFmpegInstrumentationTest.this) {
                         FFmpegInstrumentationTest.this.notify();
                     }
