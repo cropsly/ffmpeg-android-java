@@ -1,13 +1,10 @@
-package com.github.hiteshsondhi88.sampleffmpeg;
+package com.github.hiteshsondhi88.sampleffmpeg.screens.home;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,30 +13,33 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import dagger.ObjectGraph;
+import butterknife.OnClick;
 
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+import com.github.hiteshsondhi88.sampleffmpeg.R;
+import com.github.hiteshsondhi88.sampleffmpeg.core.BaseActivity;
+import com.github.hiteshsondhi88.sampleffmpeg.core.BaseApplication;
 
-public class Home extends Activity implements View.OnClickListener {
+public class HomeActivity extends BaseActivity {
 
-    private static final String TAG = Home.class.getSimpleName();
+    private static final String TAG = HomeActivity.class.getSimpleName();
 
     @Inject
-    FFmpeg ffmpeg;
+    public FFmpeg ffmpeg;
 
-    @InjectView(R.id.command)
+    @BindView(R.id.command)
     EditText commandEditText;
 
-    @InjectView(R.id.command_output)
+    @BindView(R.id.command_output)
     LinearLayout outputLayout;
 
-    @InjectView(R.id.run_command)
+    @BindView(R.id.run_command)
     Button runButton;
 
     private ProgressDialog progressDialog;
@@ -48,16 +48,17 @@ public class Home extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.inject(this);
-        ObjectGraph.create(new DaggerDependencyModule(this)).inject(this);
+        ButterKnife.bind(this);
+
+        BaseApplication.getInstance().getApplicationComponent().inject(this);
+
+        setToolbar(getResources().getString(R.string.app_name), false);
 
         loadFFMpegBinary();
         initUI();
     }
 
     private void initUI() {
-        runButton.setOnClickListener(this);
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(null);
     }
@@ -80,19 +81,19 @@ public class Home extends Activity implements View.OnClickListener {
             ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
                 @Override
                 public void onFailure(String s) {
-                    addTextViewToLayout("FAILED with output : "+s);
+                    addTextViewToLayout("FAILED with output : " + s);
                 }
 
                 @Override
                 public void onSuccess(String s) {
-                    addTextViewToLayout("SUCCESS with output : "+s);
+                    addTextViewToLayout("SUCCESS with output : " + s);
                 }
 
                 @Override
                 public void onProgress(String s) {
-                    Log.d(TAG, "Started command : ffmpeg "+command);
-                    addTextViewToLayout("progress : "+s);
-                    progressDialog.setMessage("Processing\n"+s);
+                    Log.d(TAG, "Started command : ffmpeg " + command);
+                    addTextViewToLayout("progress : " + s);
+                    progressDialog.setMessage("Processing\n" + s);
                 }
 
                 @Override
@@ -106,7 +107,7 @@ public class Home extends Activity implements View.OnClickListener {
 
                 @Override
                 public void onFinish() {
-                    Log.d(TAG, "Finished command : ffmpeg "+command);
+                    Log.d(TAG, "Finished command : ffmpeg " + command);
                     progressDialog.dismiss();
                 }
             });
@@ -116,13 +117,13 @@ public class Home extends Activity implements View.OnClickListener {
     }
 
     private void addTextViewToLayout(String text) {
-        TextView textView = new TextView(Home.this);
+        TextView textView = new TextView(HomeActivity.this);
         textView.setText(text);
         outputLayout.addView(textView);
     }
 
     private void showUnsupportedExceptionDialog() {
-        new AlertDialog.Builder(Home.this)
+        new AlertDialog.Builder(HomeActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(getString(R.string.device_not_supported))
                 .setMessage(getString(R.string.device_not_supported_message))
@@ -130,7 +131,7 @@ public class Home extends Activity implements View.OnClickListener {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Home.this.finish();
+                        HomeActivity.this.finish();
                     }
                 })
                 .create()
@@ -138,18 +139,14 @@ public class Home extends Activity implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.run_command:
-                String cmd = commandEditText.getText().toString();
-                String[] command = cmd.split(" ");
-                if (command.length != 0) {
-                    execFFmpegBinary(command);
-                } else {
-                    Toast.makeText(Home.this, getString(R.string.empty_command_toast), Toast.LENGTH_LONG).show();
-                }
-                break;
+    @OnClick(R.id.run_command)
+    void runCommand() {
+        String cmd = commandEditText.getText().toString();
+        String[] command = cmd.split(" ");
+        if (command.length != 0) {
+            execFFmpegBinary(command);
+        } else {
+            Toast.makeText(HomeActivity.this, getString(R.string.empty_command_toast), Toast.LENGTH_LONG).show();
         }
     }
 }
