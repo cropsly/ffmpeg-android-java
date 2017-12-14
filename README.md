@@ -1,3 +1,8 @@
+!!! Deprecated !!!
+===================
+
+This project is discontinued. There is a much better [alternative by bravobit](https://github.com/bravobit/FFmpeg-Android) which incorporates good parts of this fork as well as improves existing issues. I'll be keeping a close eye to its issue tracker and contribute there instead.
+
 About the fork
 ===================
 ### Installation
