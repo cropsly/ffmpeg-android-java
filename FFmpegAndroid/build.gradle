@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
 // This is the library version used when deploying the artifact
@@ -28,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -37,43 +37,43 @@ dependencies {
 }
 
 group = GROUP
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging POM_PACKAGING
-
-                // Add your description here
-                name 'FFmpeg Android'
-                description = POM_DESCRIPTION
-                url POM_URL
-
-                // Set your license
-                licenses {
-                    license {
-                        name POM_LICENCE_NAME
-                        url POM_LICENCE_URL
-                    }
-                }
-                developers {
-                    developer {
-                        id POM_DEVELOPER_ID
-                        name POM_DEVELOPER_NAME
-                        email 'hitesh@writingminds.com'
-                    }
-                }
-                scm {
-                    connection POM_SCM_URL
-                    developerConnection POM_SCM_URL
-                    url POM_URL
-
-                }
-            }
-        }
-    }
-}
+//
+//install {
+//    repositories.mavenInstaller {
+//        // This generates POM.xml with proper parameters
+//        pom {
+//            project {
+//                packaging POM_PACKAGING
+//
+//                // Add your description here
+//                name 'FFmpeg Android'
+//                description = POM_DESCRIPTION
+//                url POM_URL
+//
+//                // Set your license
+//                licenses {
+//                    license {
+//                        name POM_LICENCE_NAME
+//                        url POM_LICENCE_URL
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id POM_DEVELOPER_ID
+//                        name POM_DEVELOPER_NAME
+//                        email 'hitesh@writingminds.com'
+//                    }
+//                }
+//                scm {
+//                    connection POM_SCM_URL
+//                    developerConnection POM_SCM_URL
+//                    url POM_URL
+//
+//                }
+//            }
+//        }
+//    }
+//}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

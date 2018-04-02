@@ -29,12 +29,15 @@ android {
         }
     }
 }
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
 dependencies {
     compile 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'com.squareup.dagger:dagger:1.2.2'
     compile 'com.jakewharton:butterknife:5.1.2'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
     compile project(':FFmpegAndroid')
+    implementation 'com.android.support:support-v13:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
 }
