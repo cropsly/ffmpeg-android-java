@@ -63,4 +63,11 @@ interface FFmpegInterface {
      */
     public void setTimeout(long timeout);
 
+    /**
+     * Wait for ffmpeg to get ready asynchronously
+     * @param onReady code to run when FFmpeg is ready
+     * @param timeout when to give up in miliseconds
+     */
+    public FFmpegObserver whenFFmpegIsReady(Runnable onReady, int timeout);
+
 }

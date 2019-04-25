@@ -12,7 +12,7 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedExceptio
 @SuppressWarnings("unused")
 public class FFmpeg implements FFmpegInterface {
 
-    private final Context context;
+    private final FFmpegContextProvider context;
     private FFmpegExecuteAsyncTask ffmpegExecuteAsyncTask;
     private FFmpegLoadLibraryAsyncTask ffmpegLoadLibraryAsyncTask;
 
@@ -21,14 +21,27 @@ public class FFmpeg implements FFmpegInterface {
 
     private static FFmpeg instance = null;
 
-    private FFmpeg(Context context) {
-        this.context = context.getApplicationContext();
-        Log.setDEBUG(Util.isDebug(this.context));
+    private FFmpeg(FFmpegContextProvider contextProvider) {
+        this.context = contextProvider;
+        Log.setDEBUG(Util.isDebug(this.context.provide()));
     }
 
-    public static FFmpeg getInstance(Context context) {
+    public static FFmpeg getInstance(FFmpegContextProvider contextProvider) {
         if (instance == null) {
-            instance = new FFmpeg(context);
+            instance = new FFmpeg(contextProvider);
+        }
+        return instance;
+    }
+
+    @Deprecated
+    public static FFmpeg getInstance(final Context context) {
+        if (instance == null) {
+            instance = new FFmpeg(new FFmpegContextProvider() {
+                @Override
+                public Context provide() {
+                    return context;
+                }
+            });
         }
         return instance;
     }
@@ -63,7 +76,7 @@ public class FFmpeg implements FFmpegInterface {
             throw new FFmpegCommandAlreadyRunningException("FFmpeg command is already running, you are only allowed to run single command at a time");
         }
         if (cmd.length != 0) {
-            String[] ffmpegBinary = new String[] { FileUtils.getFFmpeg(context, environvenmentVars) };
+            String[] ffmpegBinary = new String[] { FileUtils.getFFmpeg(context.provide(), environvenmentVars) };
             String[] command = concatenate(ffmpegBinary, cmd);
             ffmpegExecuteAsyncTask = new FFmpegExecuteAsyncTask(command , timeout, ffmpegExecuteResponseHandler);
             ffmpegExecuteAsyncTask.execute();
@@ -72,7 +85,7 @@ public class FFmpeg implements FFmpegInterface {
         }
     }
 
-    public <T> T[] concatenate (T[] a, T[] b) {
+    private static <T> T[] concatenate (T[] a, T[] b) {
         int aLen = a.length;
         int bLen = b.length;
 
@@ -92,7 +105,7 @@ public class FFmpeg implements FFmpegInterface {
     @Override
     public String getDeviceFFmpegVersion() throws FFmpegCommandAlreadyRunningException {
         ShellCommand shellCommand = new ShellCommand();
-        CommandResult commandResult = shellCommand.runWaitFor(new String[] { FileUtils.getFFmpeg(context), "-version" });
+        CommandResult commandResult = shellCommand.runWaitFor(new String[] { FileUtils.getFFmpeg(context.provide()), "-version" });
         if (commandResult.success) {
             return commandResult.output.split(" ")[2];
         }
@@ -102,17 +115,22 @@ public class FFmpeg implements FFmpegInterface {
 
     @Override
     public String getLibraryFFmpegVersion() {
-        return context.getString(R.string.shipped_ffmpeg_version);
+        return context.provide().getString(R.string.shipped_ffmpeg_version);
     }
 
     @Override
     public boolean isFFmpegCommandRunning() {
-        return ffmpegExecuteAsyncTask != null && !ffmpegExecuteAsyncTask.isProcessCompleted();
+        if (ffmpegExecuteAsyncTask == null)
+          return false;
+        else
+          return !ffmpegExecuteAsyncTask.isProcessCompleted();
     }
 
     @Override
     public boolean killRunningProcesses() {
-        return Util.killAsync(ffmpegLoadLibraryAsyncTask) || Util.killAsync(ffmpegExecuteAsyncTask);
+        boolean status = Util.killAsync(ffmpegLoadLibraryAsyncTask) || Util.killAsync(ffmpegExecuteAsyncTask);
+        ffmpegExecuteAsyncTask = null;
+        return status;
     }
 
     @Override
@@ -120,5 +138,15 @@ public class FFmpeg implements FFmpegInterface {
         if (timeout >= MINIMUM_TIMEOUT) {
             this.timeout = timeout;
         }
+    }
+
+    @Override
+    public FFmpegObserver whenFFmpegIsReady(Runnable onReady, int timeout) {
+        return Util.observeOnce(new Util.ObservePredicate() {
+            @Override
+            public Boolean isReadyToProceed() {
+                return !isFFmpegCommandRunning();
+            }
+        }, onReady, timeout);
     }
 }

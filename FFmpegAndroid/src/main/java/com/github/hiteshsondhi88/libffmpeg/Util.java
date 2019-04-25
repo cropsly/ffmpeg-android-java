@@ -53,8 +53,13 @@ class Util {
     }
 
     static void destroyProcess(Process process) {
-        if (process != null)
-            process.destroy();
+        if (process != null) {
+            try {
+                process.destroy();
+            } catch (Exception e) {
+                Log.e("process destroy error", e);
+            }
+        }
     }
 
     static boolean killAsync(AsyncTask asyncTask) {
@@ -70,5 +75,57 @@ class Util {
             // do nothing
         }
         return false;
+    }
+
+    public interface ObservePredicate {
+        Boolean isReadyToProceed();
+    }
+
+    public static FFmpegObserver observeOnce(final ObservePredicate predicate, final Runnable run, final int timeout) {
+        final android.os.Handler observer = new android.os.Handler();
+
+        // Enable this to detect neverending observers
+//        final Exception e = new RuntimeException("WTF");
+
+        final FFmpegObserver observeAction = new FFmpegObserver() {
+            private boolean canceled = false;
+            private int timeElapsed = 0;
+
+            @Override
+            public void run() {
+                if (timeElapsed + 40 > timeout) cancel();
+                timeElapsed += 40;
+
+                if (canceled) return;
+
+                Boolean readyToProceed = null;
+                try {
+                    readyToProceed = predicate.isReadyToProceed();
+                } catch (Exception e) {
+//                    Log.v("Observing " + e.getMessage());
+                    observer.postDelayed(this, 40);
+                    return;
+                }
+
+                if (readyToProceed != null && readyToProceed) {
+//                    Log.v("Observed");
+                    run.run();
+                } else {
+                    // Enable this to detect neverending observers
+//                    Log.v("Util", "Observing", e);
+//                    Log.v("Observing");
+                    observer.postDelayed(this, 40);
+                }
+            }
+
+            @Override
+            public void cancel() {
+                canceled = true;
+            }
+        };
+
+        observer.post(observeAction);
+
+        return observeAction;
     }
 }
