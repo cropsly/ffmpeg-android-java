@@ -1,5 +1,9 @@
-<manifest package="com.github.hiteshsondhi88.libffmpeg">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    package="com.github.hiteshsondhi88.libffmpeg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application />
+    <application
+        android:extractNativeLibs = "true"
+        tools:targetApi="m" />
 
 </manifest>
