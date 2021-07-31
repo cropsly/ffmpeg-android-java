@@ -1,1 +1,2 @@
-include ':app', ':FFmpegAndroid'
+include ':app'
+include ':FFmpegAndroid'

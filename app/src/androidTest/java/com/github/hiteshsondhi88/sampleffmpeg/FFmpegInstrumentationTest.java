@@ -1,12 +1,11 @@
 package com.github.hiteshsondhi88.sampleffmpeg;
 
+import android.app.Instrumentation;
 import android.os.Environment;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import java.io.File;
-
-import javax.inject.Inject;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
@@ -19,7 +18,6 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
     private static final String TAG = FFmpegInstrumentationTest.class.getSimpleName();
 
-    @Inject
     FFmpeg ffmpeg;
 
     public FFmpegInstrumentationTest() {
@@ -30,6 +28,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
     protected void setUp() throws Exception {
         super.setUp();
         assertNotNull(getActivity());
+        ffmpeg = FFmpeg.getInstance(new Instrumentation().getContext());
         ffmpeg = getActivity().ffmpeg;
         assertNotNull(ffmpeg);
         ffmpeg.loadBinary(new FFmpegLoadBinaryResponseHandler() {
@@ -123,21 +122,23 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
     public void testLibass() {
         File outass = new File(getFFmpegFilesDir(), "output.ass");
-        checkFFmpegCommon("-y -i "+getSrtSampleFile()+" "+outass.getAbsolutePath(), outass);
+        checkFFmpegCommon("-y -i " + getSrtSampleFile() + " " + outass.getAbsolutePath(), outass);
     }
 
     private void checkFFmpegConvertUsingx264(File inputFile, File outputFile) {
-        checkFFmpegCommon("-y -i "+inputFile.getAbsolutePath()+" -c:v libx264 -preset ultrafast "+outputFile.getAbsolutePath(), outputFile);
+        checkFFmpegCommon("-y -i " + inputFile.getAbsolutePath() + " -c:v libx264 -preset ultrafast " + outputFile.getAbsolutePath(), outputFile);
     }
 
     private void checkFFmpegConvertCommon(File inputFile, File outputFile) {
-        checkFFmpegCommon("-y -i "+inputFile.getAbsolutePath()+" "+outputFile.getAbsolutePath(), outputFile);
+        checkFFmpegCommon("-y -i " + inputFile.getAbsolutePath() + " " + outputFile.getAbsolutePath(), outputFile);
     }
 
     private void checkFFmpegCommon(final String cmd, final File outputFile) {
-        Log.d(TAG, "start : "+outputFile.getAbsolutePath());
+        Log.d(TAG, "start : " + outputFile.getAbsolutePath());
         try {
-            ffmpeg.execute(cmd, new FFmpegExecuteResponseHandler() {
+            String[] array = new String[1];
+            array[0] = cmd;
+            ffmpeg.execute(array, new FFmpegExecuteResponseHandler() {
 
                 @Override
                 public void onStart() {
@@ -146,7 +147,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
                 @Override
                 public void onProgress(String message) {
-                    Log.d(TAG, "progress : "+message);
+                    Log.d(TAG, "progress : " + message);
                 }
 
                 @Override
@@ -161,7 +162,7 @@ public class FFmpegInstrumentationTest extends ActivityInstrumentationTestCase2<
 
                 @Override
                 public void onFinish() {
-                    Log.d(TAG, "done : "+outputFile.getAbsolutePath());
+                    Log.d(TAG, "done : " + outputFile.getAbsolutePath());
                     synchronized (FFmpegInstrumentationTest.this) {
                         FFmpegInstrumentationTest.this.notify();
                     }
