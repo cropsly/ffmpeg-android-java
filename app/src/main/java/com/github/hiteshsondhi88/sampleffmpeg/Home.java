@@ -14,11 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import dagger.ObjectGraph;
 
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
@@ -30,8 +27,7 @@ public class Home extends Activity implements View.OnClickListener {
 
     private static final String TAG = Home.class.getSimpleName();
 
-    @Inject
-    FFmpeg ffmpeg;
+    public FFmpeg ffmpeg;
 
     @InjectView(R.id.command)
     EditText commandEditText;
@@ -49,7 +45,6 @@ public class Home extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.inject(this);
-        ObjectGraph.create(new DaggerDependencyModule(this)).inject(this);
 
         loadFFMpegBinary();
         initUI();
@@ -64,6 +59,7 @@ public class Home extends Activity implements View.OnClickListener {
 
     private void loadFFMpegBinary() {
         try {
+            FFmpeg ffmpeg = FFmpeg.getInstance(getApplicationContext());
             ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
                 @Override
                 public void onFailure() {
@@ -80,19 +76,19 @@ public class Home extends Activity implements View.OnClickListener {
             ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
                 @Override
                 public void onFailure(String s) {
-                    addTextViewToLayout("FAILED with output : "+s);
+                    addTextViewToLayout("FAILED with output : " + s);
                 }
 
                 @Override
                 public void onSuccess(String s) {
-                    addTextViewToLayout("SUCCESS with output : "+s);
+                    addTextViewToLayout("SUCCESS with output : " + s);
                 }
 
                 @Override
                 public void onProgress(String s) {
-                    Log.d(TAG, "Started command : ffmpeg "+command);
-                    addTextViewToLayout("progress : "+s);
-                    progressDialog.setMessage("Processing\n"+s);
+                    Log.d(TAG, "Started command : ffmpeg " + command);
+                    addTextViewToLayout("progress : " + s);
+                    progressDialog.setMessage("Processing\n" + s);
                 }
 
                 @Override
@@ -106,7 +102,7 @@ public class Home extends Activity implements View.OnClickListener {
 
                 @Override
                 public void onFinish() {
-                    Log.d(TAG, "Finished command : ffmpeg "+command);
+                    Log.d(TAG, "Finished command : ffmpeg " + command);
                     progressDialog.dismiss();
                 }
             });
