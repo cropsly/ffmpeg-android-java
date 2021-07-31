@@ -1,10 +1,13 @@
 package com.github.hiteshsondhi88.sampleffmpeg;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +28,7 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedExceptio
 
 public class Home extends Activity implements View.OnClickListener {
 
+    private static final int REQUEST_CODE = 100;
     private static final String TAG = Home.class.getSimpleName();
 
     public FFmpeg ffmpeg;
@@ -48,6 +52,10 @@ public class Home extends Activity implements View.OnClickListener {
 
         loadFFMpegBinary();
         initUI();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
+        }
     }
 
     private void initUI() {
@@ -131,7 +139,6 @@ public class Home extends Activity implements View.OnClickListener {
                 })
                 .create()
                 .show();
-
     }
 
     @Override

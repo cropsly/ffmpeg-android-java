@@ -33,7 +33,9 @@ android {
 
 dependencies {
     implementation 'com.jakewharton:butterknife:5.1.2'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation 'com.squareup.assertj:assertj-android:1.0.0'
     implementation project(':FFmpegAndroid')
+
+    implementation 'com.android.support:support-v13:28.0.0'
 }
