@@ -59,7 +59,7 @@ public class Home extends Activity implements View.OnClickListener {
 
     private void loadFFMpegBinary() {
         try {
-            FFmpeg ffmpeg = FFmpeg.getInstance(getApplicationContext());
+            ffmpeg = FFmpeg.getInstance(getApplicationContext());
             ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
                 @Override
                 public void onFailure() {
