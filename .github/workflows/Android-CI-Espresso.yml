@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    name: Build JDK ${{ matrix.java_version }}
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        java_version: [ 11 ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Install JDK ${{ matrix.java_version }}
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: ${{ matrix.java_version }}
+      - name: Install Android SDK
+        uses: malinskiy/action-android/install-sdk@release/0.1.2
+      - name: Build project
+        run: ./gradlew assemble
+      - name: Run tests
+        run: ./gradlew test
+      - name: Checks
+        run: ./gradlew check
+      - name: Archive Lint report
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: Lint-report
+          path: app/build/reports/lint-results.html
+#  Espresso:
+#    name: Espresso ${{ matrix.java_version }}
+#    runs-on: macOS-latest
+#    strategy:
+#      matrix:
+#        java_version: [ 11 ]
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2.3.4
+#      - name: Install JDK ${{ matrix.java_version }}
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: ${{ matrix.java_version }}
+#      - name: Install Android SDK
+#        uses: malinskiy/action-android/install-sdk@release/0.1.2
+#      - name: Run instrumentation tests
+#        uses: malinskiy/action-android/emulator-run-cmd@release/0.1.2
+#        with:
+#          cmd: ./gradlew cAT --continue
+#          api: 28
+#          tag: default
+#          abi: x86
+#      - name: Archive Espresso results
+#        uses: actions/upload-artifact@v2.2.4
+#        with:
+#          name: Espresso-report
+#          path: app/build/reports/androidTests/connected
+
